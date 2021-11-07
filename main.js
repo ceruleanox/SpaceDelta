@@ -2,8 +2,61 @@ import './style.css'
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
+import * as data from './posInit.json';
+const { x } = data;
+//alert(data);
 //import { xxx } from 'http://www.webglearth.com/v2/api.js'
 
+var array1 = new Array();
+var array2 = new Array();
+
+function readTextFile(file, callback) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.overrideMimeType("application/json");
+  rawFile.open("GET", file, true);
+  rawFile.onreadystatechange = function() {
+      if (rawFile.readyState === 4 && rawFile.status == "200") {
+          callback(rawFile.responseText);
+      }
+  }
+  rawFile.send(null);
+}
+
+//usage:
+readTextFile("./posInit.json", function(text){
+  var data = JSON.parse(text);
+  //console.log(data);
+  //alert(data);
+
+  for (let i = 0; i < data.length; i++) {
+    //text += cars[i] + "<br>";
+    array1[i] = data[i];
+  //  for(let j = 0; i < 3; j++){
+  //    alert(JSON.stringify(array1[j]));
+  //  }
+  }
+  //alert(array1[1][1] + array1[2][1] + array1[3][1]);
+  alert(JSON.stringify(array1[1]));
+  alert(JSON.stringify(array1[1]) + JSON.stringify(array1[2]));
+  alert(array1[1] + array1[2] + array1[3]);
+});
+
+
+//const coordinates = posinit.json;
+//let sww = JSON.parse('posInit.json');
+//var json1 = require('./posInit.json');
+
+//fetch("posInit.json")
+//  .then(response => response.json())
+//  .then(json => alert(json.x));
+
+function a(){
+////  alert(JSON.parse("posInit.json"));
+alert(JSON.parse(x));
+}
+
+//a.call()
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera (75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -94,6 +147,20 @@ const spaceTexture = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceTexture;
 
 ///////////////////////////////////////////////////////
+/*
+alert(array1[1]);
+function b(){
+for (let k = 0; k < array1.length; k++) {
+  //text += cars[i] + "<br>";
+  alert(array1[i]);
+  //array1[i] = data[i];
+  for(let j = 0; i < 3; j++){
+    alert(array1[j]);
+  }
+}
+}
+*/
+//b.call();
 
 // add satellite cube option
 
@@ -105,14 +172,18 @@ const satellite = new THREE.Mesh(
 
 scene.add(satellite);
 
+satellite.position.x = -8;
+satellite.position.y = 13;
+satellite.position.z = -20;
+
 
 //satellite.position.x = 5;
 //satellite.position.y = -10;
 //satellite.position.z = 10;
 
-satellite.position.x = -8855.823863;
-satellite.position.y = 13117.780146;
-satellite.position.z = -20728.353233;
+//satellite.position.x = -8855.823863;
+//satellite.position.y = 13117.780146;
+//satellite.position.z = -20728.353233;
 
 ///////////////////////////////////////////////////////
 
