@@ -2,6 +2,7 @@ import './style.css'
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+//import { xxx } from 'http://www.webglearth.com/v2/api.js'
 
 const scene = new THREE.Scene();
 
@@ -19,23 +20,35 @@ renderer.render(scene, camera);
 
 //////////////////////////////////////////////////////////
 
+
+/*function initialize() {
+  var earth = new WE.map('earth_div');
+  WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(earth);
+  //scene.add( earth );
+}
+*/
 // for a basic sphere
-// const geometry = new THREE.SphereGeometry(8, 16, 8);
+//const geometry = new THREE.SphereGeometry(15, 32, 16);
+ const geometry = new THREE.SphereGeometry(8, 16, 8);
 /* use one below */
   // solid yellow
-  // const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+   const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+   material.map    = THREE.ImageUtils.loadTexture('earthmap1k.jpg')
+   
   // mesh orange
   // const material = new THREE.MeshBasicMaterial( { color: 0xFF6338, wireframe: true } );
-// const sphere = new THREE.Mesh( geometry, material );
-// scene.add( sphere );
+ const sphere = new THREE.Mesh( geometry, material );
+ scene.add( sphere );
 
 
 // create donut ring shape
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-// const material = new THREE.MeshBasicMaterial( { color: 0xFF6333, wireframe: true } );
-const material = new THREE.MeshStandardMaterial( { color: 0xFF6333, wireframe: true } );
-const torus = new THREE.Mesh(geometry,material);
-scene.add(torus);
+//const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+  //// const material = new THREE.MeshBasicMaterial( { color: 0xFF6333, wireframe: true } );
+//const material = new THREE.MeshStandardMaterial( { color: 0xFF6333, wireframe: true } );
+//const torus = new THREE.Mesh(geometry,material);
+//scene.add(torus);
 
 // standard material needs light source to show
 
@@ -93,16 +106,20 @@ const satellite = new THREE.Mesh(
 scene.add(satellite);
 
 
-satellite.position.x = 5;
-satellite.position.y = -10;
-satellite.position.z = 10;
+//satellite.position.x = 5;
+//satellite.position.y = -10;
+//satellite.position.z = 10;
+
+satellite.position.x = -8855.823863;
+satellite.position.y = 13117.780146;
+satellite.position.z = -20728.353233;
 
 ///////////////////////////////////////////////////////
 
 function animate() {
   requestAnimationFrame(animate);
 
-  torus.rotation.x += 0.01;
+ // torus.rotation.x += 0.01;
 
   // sphere.rotation.x += 0.01;
   // sphere.rotation.y += 0.005;
