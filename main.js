@@ -7,7 +7,7 @@ import * as data from './posInit.json';
 const { x } = data;
 //alert(data);
 //import { xxx } from 'http://www.webglearth.com/v2/api.js'
-
+/*
 var array1 = new Array();
 var array2 = new Array();
 
@@ -38,10 +38,20 @@ readTextFile("./posInit.json", function(text){
   }
   //alert(array1[1][1] + array1[2][1] + array1[3][1]);
   alert(JSON.stringify(array1[1]));
+  //alert(JSON.stringify(array1[1].x));
+  //var lat = (int) jsonObj.get("age");
+
+  //parsefloat will turn x into a number
+  alert(parseFloat(array1[1].x));
+  alert((parseFloat(array1[1].x)) / 1000);
+
+  var xaxis = (parseFloat(array1[1].x) / 1000);
+  alert("x axis" + xaxis);
+  //alert(Integer.parseInt(array1[1].x));
   alert(JSON.stringify(array1[1]) + JSON.stringify(array1[2]));
   alert(array1[1] + array1[2] + array1[3]);
 });
-
+*/
 
 //const coordinates = posinit.json;
 //let sww = JSON.parse('posInit.json');
@@ -162,19 +172,87 @@ for (let k = 0; k < array1.length; k++) {
 */
 //b.call();
 
-// add satellite cube option
-
 const satelliteTexture = new THREE.TextureLoader().load('satellite.png');
 const satellite = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
   new THREE.MeshBasicMaterial({ map: satelliteTexture})
 );
 
-scene.add(satellite);
 
-satellite.position.x = -8;
-satellite.position.y = 13;
-satellite.position.z = -20;
+var array1 = new Array();
+var array2 = new Array();
+
+function readTextFile(file, callback) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.overrideMimeType("application/json");
+  rawFile.open("GET", file, true);
+  rawFile.onreadystatechange = function() {
+      if (rawFile.readyState === 4 && rawFile.status == "200") {
+          callback(rawFile.responseText);
+      }
+  }
+  rawFile.send(null);
+}
+
+//usage:
+readTextFile("./posInit.json", function(text){
+  var data = JSON.parse(text);
+  //console.log(data);
+  //alert(data.length);
+
+  for (let i = 0; i < data.length; i++) {
+    //text += cars[i] + "<br>";
+    //function addSat(){
+    array1[i] = data[i];
+    var xaxis = (parseFloat(array1[i].x) / 1000);
+    var yaxis = (parseFloat(array1[i].y) / 1000);
+    var zaxis = (parseFloat(array1[i].z) / 1000);
+    //satellite.position.x = xaxis;
+    //satellite.position.y = yaxis;
+    //satellite.position.z = zaxis;
+    satellite.position.set(xaxis,yaxis,zaxis);
+    alert("x axis " + xaxis + "y axis " + yaxis + "z axis " + zaxis);
+    scene.add(satellite);
+    //} 
+    //Array(200).fill().forEach(addSat);
+    //alert("x axis " + xaxis);
+    //alert("y axis " + yaxis);
+    //alert("z axis " + zaxis);
+
+
+  //  for(let j = 0; i < 3; j++){
+  //    alert(JSON.stringify(array1[j]));
+  //  }
+  }
+  //alert(array1[1][1] + array1[2][1] + array1[3][1]);
+  alert(JSON.stringify(array1[1]));
+  //alert(JSON.stringify(array1[1].x));
+  //var lat = (int) jsonObj.get("age");
+
+  //parsefloat will turn x into a number
+  alert(parseFloat(array1[1].x));
+  alert((parseFloat(array1[1].x)) / 1000);
+
+  //var xaxis = (parseFloat(array1[1].x) / 1000);
+  //alert("x axis" + xaxis);
+  //alert(Integer.parseInt(array1[1].x));
+  alert(JSON.stringify(array1[1]) + JSON.stringify(array1[2]));
+  alert(array1[1] + array1[2] + array1[3]);
+});
+
+// add satellite cube option
+/*
+const satelliteTexture = new THREE.TextureLoader().load('satellite.png');
+const satellite = new THREE.Mesh(
+  new THREE.BoxGeometry(3,3,3),
+  new THREE.MeshBasicMaterial({ map: satelliteTexture})
+);
+*/
+//scene.add(satellite);
+
+//satellite.position.x = -8;
+//satellite.position.y = 13;
+//satellite.position.z = -20;
 
 
 //satellite.position.x = 5;
