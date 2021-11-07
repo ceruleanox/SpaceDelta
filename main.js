@@ -3,7 +3,7 @@ import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import * as data from './posInit.json';
+import * as data from './posInitTruncated.json';
 const { x } = data;
 //alert(data);
 //import { xxx } from 'http://www.webglearth.com/v2/api.js'
@@ -171,13 +171,13 @@ for (let k = 0; k < array1.length; k++) {
 }
 */
 //b.call();
-
+/*
 const satelliteTexture = new THREE.TextureLoader().load('satellite.png');
 const satellite = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
   new THREE.MeshBasicMaterial({ map: satelliteTexture})
 );
-
+*/
 
 var array1 = new Array();
 var array2 = new Array();
@@ -195,7 +195,7 @@ function readTextFile(file, callback) {
 }
 
 //usage:
-readTextFile("./posInit.json", function(text){
+readTextFile("./posInitTruncated.json", function(text){
   var data = JSON.parse(text);
   //console.log(data);
   //alert(data.length);
@@ -204,6 +204,11 @@ readTextFile("./posInit.json", function(text){
     //text += cars[i] + "<br>";
     //function addSat(){
     array1[i] = data[i];
+    const satelliteTexture = new THREE.TextureLoader().load('satellite.png');
+  const satellite = new THREE.Mesh(
+    new THREE.BoxGeometry(3,3,3),
+    new THREE.MeshBasicMaterial({ map: satelliteTexture})
+    );
     var xaxis = (parseFloat(array1[i].x) / 1000);
     var yaxis = (parseFloat(array1[i].y) / 1000);
     var zaxis = (parseFloat(array1[i].z) / 1000);
@@ -211,7 +216,7 @@ readTextFile("./posInit.json", function(text){
     //satellite.position.y = yaxis;
     //satellite.position.z = zaxis;
     satellite.position.set(xaxis,yaxis,zaxis);
-    alert("x axis " + xaxis + "y axis " + yaxis + "z axis " + zaxis);
+    //alert("x axis " + xaxis + "y axis " + yaxis + "z axis " + zaxis);
     scene.add(satellite);
     //} 
     //Array(200).fill().forEach(addSat);
